@@ -27,13 +27,11 @@ import java.util.Date;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-/** 
-* @author 作者 Your-Name: 
-* @version 创建时间：2021年5月28日 下午2:27:42 
-* 类说明 
-*/
+/**
+ * 类说明
+ */
 public class AddRoomJDialog extends JDialog {
-	
+
 	private JTextField addressText;
 	private JTextField maxNumText;
 	private JTextField roomPriceText;
@@ -46,116 +44,116 @@ public class AddRoomJDialog extends JDialog {
 	private JXDatePicker datePicker;
 
 
-	
-	 public AddRoomJDialog(JFrame frame, boolean modal) {
-		 
+
+	public AddRoomJDialog(JFrame frame, boolean modal) {
+
 		super(frame,modal);
-		setTitle("添加房间");
+		setTitle("");
 		setBounds(100, 100, 520, 360);
 		getContentPane().setLayout(null);
-		
+
 		setLocationRelativeTo(frame);
-		
+
 		JLabel lblNewLabel = new JLabel("房间地址");
 		lblNewLabel.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel.setBounds(27, 41, 70, 22);
 		getContentPane().add(lblNewLabel);
-		
+
 		addressText = new JTextField();
 		addressText.setBounds(116, 42, 120, 21);
 		getContentPane().add(addressText);
 		addressText.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("可容纳人数");
 		lblNewLabel_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(27, 92, 85, 22);
 		getContentPane().add(lblNewLabel_1);
-		
+
 		maxNumText = new JTextField();
 		maxNumText.setColumns(10);
 		maxNumText.setBounds(116, 92, 120, 21);
 		getContentPane().add(maxNumText);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("房    租");
 		lblNewLabel_1_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_1_1.setBounds(27, 140, 85, 22);
 		getContentPane().add(lblNewLabel_1_1);
-		
+
 		roomPriceText = new JTextField();
 		roomPriceText.setColumns(10);
 		roomPriceText.setBounds(116, 140, 120, 21);
 		getContentPane().add(roomPriceText);
-		
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("房    东");
 		lblNewLabel_1_1_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_1_1_1.setBounds(27, 188, 85, 22);
 		getContentPane().add(lblNewLabel_1_1_1);
-		
+
 		masterText = new JTextField();
 		masterText.setColumns(10);
 		masterText.setBounds(116, 188, 120, 21);
 		getContentPane().add(masterText);
-		
+
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("房间状态");
 		lblNewLabel_1_1_1_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_1_1_1_1.setBounds(28, 236, 85, 22);
 		getContentPane().add(lblNewLabel_1_1_1_1);
-		
+
 		String strs[] = {"正常","设备损坏"};
 		roomStatus = new JComboBox(strs);
 		roomStatus.setBounds(117, 236, 119, 21);
 		getContentPane().add(roomStatus);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("房间户型");
 		lblNewLabel_2.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_2.setBounds(284, 41, 70, 22);
 		getContentPane().add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_2_1 = new JLabel("房间类型");
 		lblNewLabel_2_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_2_1.setBounds(283, 91, 70, 22);
 		getContentPane().add(lblNewLabel_2_1);
-		
+
 		String strs1[]= {"男生宿舍","女生宿舍"};
 		roomType = new JComboBox(strs1);
 		roomType.setBounds(354, 91, 119, 21);
 		getContentPane().add(roomType);
-		
+
 		roomTypeText = new JTextField();
 		roomTypeText.setColumns(10);
 		roomTypeText.setBounds(355, 42, 120, 21);
 		getContentPane().add(roomTypeText);
-		
+
 		JLabel lblNewLabel_2_2 = new JLabel("支付方式");
 		lblNewLabel_2_2.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_2_2.setBounds(283, 139, 70, 22);
 		getContentPane().add(lblNewLabel_2_2);
-		
+
 		roomPayText = new JTextField();
 		roomPayText.setColumns(10);
 		roomPayText.setBounds(354, 139, 120, 21);
 		getContentPane().add(roomPayText);
-		
+
 		JLabel lblNewLabel_2_2_1 = new JLabel("房东电话");
 		lblNewLabel_2_2_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_2_2_1.setBounds(283, 186, 70, 22);
 		getContentPane().add(lblNewLabel_2_2_1);
-		
+
 		roomPhone = new JTextField();
 		roomPhone.setColumns(10);
 		roomPhone.setBounds(354, 185, 120, 21);
 		getContentPane().add(roomPhone);
-		
+
 		JLabel lblNewLabel_2_2_1_1 = new JLabel("租房日期");
 		lblNewLabel_2_2_1_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_2_2_1_1.setBounds(283, 236, 70, 22);
 		getContentPane().add(lblNewLabel_2_2_1_1);
-		
+
 		datePicker = new JXDatePicker();
 		datePicker.getEditor().setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		datePicker.setBounds(354, 236, 120, 21);
 		getContentPane().add(datePicker);
-		
+
 		JButton btnNewButton = new JButton("添加房间");
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
@@ -165,7 +163,7 @@ public class AddRoomJDialog extends JDialog {
 		});
 		btnNewButton.setBounds(292, 293, 97, 23);
 		getContentPane().add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("重置内容");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
@@ -175,7 +173,7 @@ public class AddRoomJDialog extends JDialog {
 		});
 		btnNewButton_1.setBounds(399, 293, 97, 23);
 		getContentPane().add(btnNewButton_1);
-		
+
 		setVisible(true);
 	}
 
@@ -243,6 +241,6 @@ public class AddRoomJDialog extends JDialog {
 		}else {
 			JOptionPane.showMessageDialog(this, "房间重复，添加失败");
 		}
-		
+
 	}
 }

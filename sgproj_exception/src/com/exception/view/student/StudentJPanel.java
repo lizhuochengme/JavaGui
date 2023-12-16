@@ -35,13 +35,11 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
-/** 
-* @author 作者 Your-Name: 
-* @version 创建时间：2021年6月2日 上午10:50:03 
-* 类说明 
-*/
+/**
+ * 类说明
+ */
 public class StudentJPanel extends JPanel {
-	
+
 	private JFrame fatherFrame;
 	private JTable table;
 	private DefaultTableModel dtm = null;
@@ -51,8 +49,8 @@ public class StudentJPanel extends JPanel {
 	private ClassService classService = new ClassServiceImpl();
 	private RoomService roomService = new RoomServiceImpl();
 	private StudentService studentService = new StudentServiceImpl();
-	
-	
+
+
 	private ArrayList<ClassBean> classList;
 	private ArrayList<RoomBean> roomList;
 	private ArrayList<StudentBean> stuList;
@@ -61,16 +59,16 @@ public class StudentJPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public StudentJPanel(JFrame frame) {
-		
+
 		fatherFrame = frame;
 		setBackground(SystemColor.control);
 		setBounds(0, 0, 877, 511);
 		setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 857, 412);
 		add(scrollPane);
-		
+
 		table = new JTable();
 		table.setShowVerticalLines(false);
 		table.setFont(new Font("等线", Font.BOLD, 14));
@@ -83,15 +81,19 @@ public class StudentJPanel extends JPanel {
 		r.setHorizontalAlignment(JLabel.CENTER);
 		table.setDefaultRenderer(Object.class, r);
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"\u5B66\u751F\u59D3\u540D", "\u6027\u522B", "\u73ED\u7EA7", "\u6240\u5728\u623F\u95F4", "\u8054\u7CFB\u7535\u8BDD"
-			}
+				new Object[][] {
+				},
+				new String[] {
+						"职工姓名", "性别", "部门", "所在房间", "联系电话"
+				}
+
+//			new String[] {
+//					"\u5B66\u751F\u59D3\u540D", "\u6027\u522B", "\u73ED\u7EA7", "\u6240\u5728\u623F\u95F4", "\u8054\u7CFB\u7535\u8BDD"
+//			}
 		){
-			 public boolean isCellEditable(int row, int column) {
-		           return false;
-		      };
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			};
 		});
 		table.getColumnModel().getColumn(3).setPreferredWidth(150);
 		table.getColumnModel().getColumn(3).setMinWidth(150);
@@ -99,23 +101,23 @@ public class StudentJPanel extends JPanel {
 		table.getColumnModel().getColumn(4).setMinWidth(150);
 		scrollPane.setViewportView(table);
 		dtm = (DefaultTableModel) table.getModel();
-		
-		JLabel lblNewLabel = new JLabel("学生姓名");
+
+		JLabel lblNewLabel = new JLabel("职工姓名");
 		lblNewLabel.setFont(new Font("等线", Font.PLAIN, 14));
 		lblNewLabel.setBounds(40, 432, 68, 23);
 		add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("班       级");
+
+		JLabel lblNewLabel_1 = new JLabel("部       门");
 		lblNewLabel_1.setFont(new Font("等线", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(40, 472, 68, 23);
 		add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("所在房间");
 		lblNewLabel_1_1.setFont(new Font("等线", Font.PLAIN, 14));
 		lblNewLabel_1_1.setBounds(237, 433, 68, 23);
 		add(lblNewLabel_1_1);
-		
-		JButton btnNewButton_1 = new JButton("学生换房");
+
+		JButton btnNewButton_1 = new JButton("职工换房");
 		btnNewButton_1.setBounds(646, 433, 91, 21);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
@@ -124,8 +126,8 @@ public class StudentJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_1);
-		
-		JButton btnNewButton_1_1 = new JButton("学生退房");
+
+		JButton btnNewButton_1_1 = new JButton("职工退房");
 		btnNewButton_1_1.setBounds(747, 433, 91, 21);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			@Override
@@ -134,8 +136,8 @@ public class StudentJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_1_1);
-		
-		JButton btnNewButton_1_1_1 = new JButton("查看学生详细信息");
+
+		JButton btnNewButton_1_1_1 = new JButton("查看职工详细信息");
 		btnNewButton_1_1_1.setBounds(646, 473, 192, 21);
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			@Override
@@ -144,7 +146,7 @@ public class StudentJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_1_1_1);
-		
+
 		JButton btnNewButton_2 = new JButton("查询");
 		btnNewButton_2.setBounds(555, 433, 81, 21);
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -154,7 +156,7 @@ public class StudentJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_2);
-		
+
 		JButton btnNewButton_2_1 = new JButton("刷新");
 		btnNewButton_2_1.setBounds(555, 473, 81, 21);
 		btnNewButton_2_1.addActionListener(new ActionListener() {
@@ -164,17 +166,17 @@ public class StudentJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_2_1);
-		
+
 		stuName = new JTextField();
 		stuName.setBounds(107, 433, 99, 21);
 		add(stuName);
 		stuName.setColumns(10);
-		
-		
+
+
 		stuClassComb = new JComboBox();
 		stuClassComb.setBounds(107, 473, 99, 21);
 		add(stuClassComb);
-		
+
 		stuRoomComb = new JComboBox();
 		stuRoomComb.setBounds(305, 433, 99, 21);
 		add(stuRoomComb);
@@ -183,7 +185,7 @@ public class StudentJPanel extends JPanel {
 	protected void stuInfoButton(ActionEvent e) {
 		int index = this.table.getSelectedRow();
 		if(index==-1) {
-			JOptionPane.showMessageDialog(this, "未选择学生信息");
+			JOptionPane.showMessageDialog(this, "未选择职工信息");
 			return;
 		}
 		StudentBean bean = this.stuList.get(index);
@@ -195,19 +197,19 @@ public class StudentJPanel extends JPanel {
 	protected void stuDeleteButton(ActionEvent e) {
 		int index = this.table.getSelectedRow();
 		if(index==-1) {
-			JOptionPane.showMessageDialog(this, "未选择学生信息");
+			JOptionPane.showMessageDialog(this, "未选择职工信息");
 			return;
 		}
 		StudentBean bean = this.stuList.get(index);
 		if(bean==null)
 			return;
-		if(JOptionPane.showConfirmDialog(this, "确定已退房?","正在办理学生退房...",JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
+		if(JOptionPane.showConfirmDialog(this, "确定已退房?","正在办理职工退房...",JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
 			if(studentService.deleteStudent(bean)) {
-				JOptionPane.showMessageDialog(this, "学生退房成功!");
+				JOptionPane.showMessageDialog(this, "职工退房成功!");
 				queryAllStudent();
 				return;
 			}else {
-				JOptionPane.showMessageDialog(this, "学生退房失败!");
+				JOptionPane.showMessageDialog(this, "职工退房失败!");
 				return;
 			}
 		}
@@ -216,7 +218,7 @@ public class StudentJPanel extends JPanel {
 	protected void exchangeRoomButton(ActionEvent e) {
 		int index = this.table.getSelectedRow();
 		if(index==-1) {
-			JOptionPane.showMessageDialog(this, "未选择学生信息");
+			JOptionPane.showMessageDialog(this, "未选择职工信息");
 			return;
 		}
 		StudentBean bean = this.stuList.get(index);
@@ -256,7 +258,7 @@ public class StudentJPanel extends JPanel {
 		initComboBox();
 		queryAllStudent();
 	}
-	
+
 	private void queryAllStudent() {
 		dtm.setRowCount(0);
 		stuList = studentService.queryAllStudent();
@@ -289,5 +291,5 @@ public class StudentJPanel extends JPanel {
 		this.stuClassComb.setSelectedIndex(0);
 		this.stuRoomComb.setSelectedIndex(0);
 	}
-	
+
 }

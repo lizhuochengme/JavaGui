@@ -28,12 +28,10 @@ import java.util.Date;
 
 import javax.swing.JTextField;
 
-/** 
-* @author 作者 Your-Name: 
-* @version 创建时间：2021年5月24日 上午11:13:26 
-* 类说明 
-* 新增班级和修改班级可以共用一个窗体，这里就写在一起
-*/
+/**
+ * 类说明
+ * 新增部门和修改部门可以共用一个窗体，这里就写在一起
+ */
 public class AddClassJDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -46,13 +44,13 @@ public class AddClassJDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AddClassJDialog(JFrame frame, boolean modal,ClassBean classBean) {
-		
+
 		super(frame,modal);
 		this.classBean = classBean;
 		if(classBean ==null)
-			setTitle("正在新增班级");
+			setTitle("正在新增部门");
 		else
-			setTitle("正在修改班级");
+			setTitle("正在修改部门");
 		setBounds(100, 100, 330, 250);
 		getContentPane().setLayout(new BorderLayout());
 		setLocationRelativeTo(frame);
@@ -60,51 +58,51 @@ public class AddClassJDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblNewLabel = new JLabel("班级名称:");
+			JLabel lblNewLabel = new JLabel("部门名称:");
 			lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 			lblNewLabel.setBounds(43, 29, 70, 22);
 			contentPanel.add(lblNewLabel);
 		}
-		
+
 		className = new JTextField();
 		className.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		className.setBounds(123, 30, 143, 21);
 		contentPanel.add(className);
 		className.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("带班老师:");
+
+		JLabel lblNewLabel = new JLabel("部门主管:");
 		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		lblNewLabel.setBounds(43, 75, 70, 22);
 		contentPanel.add(lblNewLabel);
-		
+
 		classTeacher = new JTextField();
 		classTeacher.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		classTeacher.setColumns(10);
 		classTeacher.setBounds(123, 77, 143, 21);
 		contentPanel.add(classTeacher);
-		
-		JLabel lblNewLabel_1 = new JLabel("开班日期:");
+
+		JLabel lblNewLabel_1 = new JLabel("部门创建日期:");
 		lblNewLabel_1.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(43, 122, 70, 22);
 		contentPanel.add(lblNewLabel_1);
-		
+
 		datePicker = new JXDatePicker();
 		datePicker.getEditor().setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		datePicker.setBounds(123, 123, 143, 21);
 		contentPanel.add(datePicker);
-		
+
 		JButton btnNewButton = new JButton("添加");
 		btnNewButton.setBounds(56, 177, 70, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					addOrEditClassButton(e);
+				addOrEditClassButton(e);
 			}
 		});
 		contentPanel.add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("重置");
-		btnNewButton_1.addActionListener(new ActionListener() {	
+		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				resetButton(e);
@@ -112,14 +110,14 @@ public class AddClassJDialog extends JDialog {
 		});
 		btnNewButton_1.setBounds(196, 177, 70, 23);
 		contentPanel.add(btnNewButton_1);
-		
+
 		if(classBean != null) {
 			className.setText(classBean.getF_name());
 			classTeacher.setText(classBean.getF_teacher());
 			datePicker.setDate(classBean.getF_time());
 			btnNewButton.setText("修改");
 		}
-		
+
 		this.setVisible(true);
 	}
 
@@ -138,7 +136,7 @@ public class AddClassJDialog extends JDialog {
 		this.setVisible(true);
 	}
 
-	//修改班级按钮动作
+	//修改部门按钮动作
 	protected void addOrEditClassButton(ActionEvent e) {
 		String classNameStr = this.className.getText();
 		String classTeacherStr = this.classTeacher.getText();
@@ -148,19 +146,19 @@ public class AddClassJDialog extends JDialog {
 			return;
 		}
 		ClassService classService = new ClassServiceImpl();
-		//新增班级
+		//新增部门
 		if(classBean == null) {
 			ClassBean clBean = new ClassBean(classNameStr, classTeacherStr, tempDate);
 			JOptionPane.showMessageDialog(this, classService.addClass(clBean));
 			resetButton(e);
 			return;
 		}
-		//修改班级
+		//修改部门
 		else {
 			ClassBean clBean = new ClassBean(this.classBean.getPk_id(),classNameStr, classTeacherStr, tempDate);
 			clBean = classService.editClass(clBean);
 			if(clBean == null) {
-				JOptionPane.showMessageDialog(this, "修改失败!班级名重复或其他原因");
+				JOptionPane.showMessageDialog(this, "修改失败!部门名重复或其他原因");
 				resetButton(e);
 			}else {
 				this.classBean = clBean;
@@ -170,7 +168,7 @@ public class AddClassJDialog extends JDialog {
 			return;
 		}
 	}
-	
-	
-	
+
+
+
 }

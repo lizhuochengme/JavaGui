@@ -25,10 +25,10 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.SystemColor;
 
-/** 
-* @author 作者 Your-Name: 
-* @version 创建时间：2021年5月17日 下午6:04:06 
-* 类说明 
+/**
+* @author 作者 Your-Name:
+* @version 创建时间：2021年5月17日 下午6:04:06
+* 类说明
 */
 public class LoginFrame extends JFrame {
 
@@ -43,8 +43,20 @@ public class LoginFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrame frame = new LoginFrame();
-					frame.setVisible(true);
+//					取消登录验证
+//					LoginFrame frame = new LoginFrame();
+//					frame.setVisible(true);
+
+//					默认值，正式版会删掉
+					String username ="1";
+					String password = "1";
+
+					UserService userService = new UserServiceImpl();
+					UserBean userBean = userService.findUserByInfo(username, password);
+
+					IndexFrame indexFrame = new IndexFrame(userBean);
+//					this.dispose();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,30 +78,30 @@ public class LoginFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("用户名:");
 		lblNewLabel.setIcon(new ImageIcon(LoginFrame.class.getResource("/image/用户名.png")));
 		lblNewLabel.setFont(new Font("微软雅黑", Font.BOLD, 15));
 		lblNewLabel.setBounds(57, 31, 76, 26);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("密   码:");
 		lblNewLabel_1.setIcon(new ImageIcon(LoginFrame.class.getResource("/image/密码.png")));
 		lblNewLabel_1.setFont(new Font("微软雅黑", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(57, 73, 88, 26);
 		contentPane.add(lblNewLabel_1);
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("微软雅黑", Font.BOLD, 12));
 		textField.setBounds(144, 34, 123, 21);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("微软雅黑", Font.BOLD, 12));
 		passwordField.setBounds(144, 78, 123, 21);
 		contentPane.add(passwordField);
-		
+
 		JButton btnNewButton = new JButton("登录");
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
@@ -106,7 +118,7 @@ public class LoginFrame extends JFrame {
 	protected void confirmButton(ActionEvent e) {
 		String username = this.textField.getText();
 		String password = this.passwordField.getText();
-		
+
 		UserService userService = new UserServiceImpl();
 		UserBean userBean = userService.findUserByInfo(username, password);
 		if(userBean == null) {
@@ -115,6 +127,6 @@ public class LoginFrame extends JFrame {
 		}
 		IndexFrame indexFrame = new IndexFrame(userBean);
 		this.dispose();
-		
+
 	}
 }

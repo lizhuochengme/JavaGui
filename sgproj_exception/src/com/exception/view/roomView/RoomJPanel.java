@@ -28,11 +28,9 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Color;
 
-/** 
-* @author 作者 Your-Name: 
-* @version 创建时间：2021年5月24日 下午6:50:44 
-* 类说明 
-*/
+/**
+ * 类说明
+ */
 public class RoomJPanel extends JPanel {
 
 
@@ -44,22 +42,22 @@ public class RoomJPanel extends JPanel {
 	private JComboBox roomType;
 	private JComboBox roomable;
 	private RoomService roomService = new RoomServiceImpl();
-	
+
 	private ArrayList<RoomBean> arrayList;
-	
+
 	public RoomJPanel(JFrame jFrame) {
-		
+
 		this.fatherFrame = jFrame;
 		setBackground(SystemColor.control);
 		setBounds(0, 0, 877, 511);
 		setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 857, 412);
 		add(scrollPane);
-		
+
 		table = new JTable();
-		
+
 		table.setShowVerticalLines(false);
 		table.setFont(new Font("等线", Font.BOLD, 14));
 		//设置用户不可拖动
@@ -68,65 +66,69 @@ public class RoomJPanel extends JPanel {
 		table.setRowHeight(35);
 		//设置表格居中显示
 		DefaultTableCellRenderer r =new DefaultTableCellRenderer();
-		
+
 		r.setHorizontalAlignment(JLabel.CENTER);
 		table.setDefaultRenderer(Object.class, r);
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"\u623F\u95F4\u5730\u5740", "\u53EF\u5BB9\u7EB3\u4EBA\u6570", "\u5DF2\u4F4F\u4EBA\u6570", "\u623F\u79DF", "\u623F\u95F4\u72B6\u6001", "\u623F\u4E1C", "\u623F\u4E1C\u7535\u8BDD", "\u623F\u95F4\u7C7B\u578B"
-			}
+				new Object[][] {
+				},
+				new String[] {
+						"房间地址", "可容纳人数", "已住人数", "房租", "房间状态", "房东", "房东电话", "房间类型"
+				}
+
+//			new String[] {
+//					"\u623F\u95F4\u5730\u5740", "\u53EF\u5BB9\u7EB3\u4EBA\u6570", "\u5DF2\u4F4F\u4EBA\u6570", "\u623F\u79DF", "\u623F\u95F4\u72B6\u6001", "\u623F\u4E1C", "\u623F\u4E1C\u7535\u8BDD", "\u623F\u95F4\u7C7B\u578B"
+//			}
 		) {
-			 public boolean isCellEditable(int row, int column) {
-		           return false;
-		      };
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			};
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(0).setMinWidth(100);
 		scrollPane.setViewportView(table);
 		this.dtm = (DefaultTableModel) table.getModel();
-		
+
 		JLabel text1 = new JLabel("房间地址");
 		text1.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		text1.setBounds(149, 432, 67, 24);
 		add(text1);
-		
+
 		roomAddress = new JTextField();
 		roomAddress.setBounds(212, 435, 103, 20);
 		add(roomAddress);
 		roomAddress.setColumns(10);
-		
+
 		JLabel text2 = new JLabel("可住房间");
 		text2.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		text2.setBounds(149, 473, 67, 24);
 		add(text2);
-		
+
 		String strs[] = {"不限","可住房间"};
 		roomable = new JComboBox(strs);
 		roomable.setBounds(212, 476, 103, 21);
 		add(roomable);
-		
+
 		JLabel text3 = new JLabel("房间状态");
 		text3.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		text3.setBounds(342, 432, 67, 24);
 		add(text3);
-		
+
 		String strs1[] = {"不限","正常","设备损坏"};
 		roomStatus = new JComboBox(strs1);
 		roomStatus.setBounds(407, 435, 103, 21);
 		add(roomStatus);
-		
+
 		JLabel text4 = new JLabel("房间类型");
 		text4.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		text4.setBounds(342, 473, 67, 24);
 		add(text4);
-		
+
 		String strs2[] = {"不限","男生寝室","女生寝室"};
 		roomType = new JComboBox(strs2);
 		roomType.setBounds(407, 476, 103, 21);
 		add(roomType);
-		
+
 		JButton btnNewButton = new JButton("查询");
 		btnNewButton.setBounds(588, 435, 67, 23);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -136,7 +138,7 @@ public class RoomJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("查看房间信息");
 		btnNewButton_1.setBounds(588, 476, 118, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -146,7 +148,7 @@ public class RoomJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_1);
-		
+
 		JButton btnNewButton_1_1 = new JButton("查看房间设施");
 		btnNewButton_1_1.setBounds(716, 476, 118, 23);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -156,7 +158,7 @@ public class RoomJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_1_1);
-		
+
 		JButton btnNewButton_2 = new JButton("删除");
 		btnNewButton_2.setBounds(679, 435, 67, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -166,7 +168,7 @@ public class RoomJPanel extends JPanel {
 			}
 		});
 		add(btnNewButton_2);
-		
+
 		JButton btnNewButton_2_1 = new JButton("重置");
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			@Override
@@ -176,7 +178,7 @@ public class RoomJPanel extends JPanel {
 		});
 		btnNewButton_2_1.setBounds(767, 435, 67, 23);
 		add(btnNewButton_2_1);
-		
+
 		JLabel lblNewLabel = new JLabel("(近似)");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 13));
@@ -224,7 +226,7 @@ public class RoomJPanel extends JPanel {
 				JOptionPane.showMessageDialog(this, "删除房间成功！");
 				resetButton();
 			}else {
-				JOptionPane.showMessageDialog(this, "房间内还有学生居住,无法删除");
+				JOptionPane.showMessageDialog(this, "房间内还有职工居住,无法删除");
 			}
 		}
 	}
